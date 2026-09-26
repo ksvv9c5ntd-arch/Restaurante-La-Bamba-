@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Restaurante La Bamba · Alta cocina del mar</title>
+<style>
+:root{--azul:#063f49;--azul2:#0b6b75;--dorado:#d8ad55;--arena:#f4efe5;--verde:#16844b}
+*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;background:var(--arena);color:#163d43}
+.wrap{max-width:720px;margin:auto;background:var(--arena);min-height:100vh}
+.hero{min-height:100vh;display:flex;align-items:flex-end;justify-content:center;text-align:center;padding:30px 20px 45px;background:radial-gradient(circle at 50% 18%,#2d8d96 0,#0b6b75 28%,#063f49 68%,#032d35 100%);color:white;position:relative;overflow:hidden}
+.hero:before{content:'◌ 〰 〰 〰';position:absolute;top:14%;left:50%;transform:translateX(-50%);font-size:34px;letter-spacing:10px;color:#d8ad55aa}
+.hero:after{content:'✦';position:absolute;top:8%;right:13%;font-size:28px;color:#f0ce7b}
+.heroContent{width:100%;position:relative;z-index:2}
+.brand{font-family:Georgia,serif;font-size:58px;line-height:1;margin:0;text-shadow:0 3px 14px #0007}
+.tag{font-size:19px;color:#f0ce7b;font-weight:bold;margin:10px 0 28px;letter-spacing:.5px}
+.buttons{display:grid;grid-template-columns:1fr 1fr;gap:11px;max-width:520px;margin:auto}
+.buttons button,.buttons a{border:0;text-decoration:none;border-radius:14px;padding:15px 10px;font-weight:bold;font-size:16px;display:flex;align-items:center;justify-content:center;gap:8px;cursor:pointer;box-shadow:0 5px 18px #0004}
+.primary{background:#fff;color:#075764}.gold{background:var(--dorado);color:#173d42}.wa{background:#25d366;color:white}.call{background:#16844b;color:white}.location{background:#e8ddca;color:#173d42}.wide{grid-column:1/-1}.small{font-size:12px;opacity:.85;margin-top:18px}
+#menu{display:none;padding-bottom:80px}
+nav{position:sticky;top:0;background:white;padding:10px;display:flex;gap:7px;overflow:auto;z-index:5;box-shadow:0 2px 10px #0001}
+nav button{border:0;border-radius:20px;padding:10px 14px;white-space:nowrap;font-weight:bold;background:#e5dccb;color:#16434a}.back{margin-left:auto;background:#075f6a!important;color:white!important}
+section{padding:18px 14px}.item{background:white;border-radius:16px;padding:15px;margin:10px 0;box-shadow:0 3px 12px #0001}.item b{display:block;font-size:17px}.price{color:#a26b1b;font-weight:bold;margin-top:5px}.add{margin-top:10px;border:0;border-radius:10px;padding:10px 14px;background:#075f6a;color:white;font-weight:bold}
+#cart{position:fixed;right:18px;bottom:18px;border:0;border-radius:50px;padding:15px 20px;background:#a26b1b;color:white;font-weight:bold;box-shadow:0 5px 20px #0004;z-index:20}
+#panel{display:none;position:fixed;inset:0;background:#0009;z-index:30;align-items:flex-end}.box{background:#f8f3e9;width:100%;max-width:720px;margin:auto;border-radius:22px 22px 0 0;padding:20px;max-height:85vh;overflow:auto}
+.line{display:flex;justify-content:space-between;gap:10px;background:white;padding:12px;border-radius:12px;margin:7px 0}
+input,textarea{width:100%;padding:11px;margin:5px 0 10px;border:1px solid #cdbfa9;border-radius:10px;box-sizing:border-box;font:inherit}
+.send{width:100%;padding:14px;border:0;border-radius:12px;background:var(--verde);color:white;font-weight:bold;font-size:16px}.close{float:right;border:0;background:none;font-size:25px}
+@media(max-width:430px){.brand{font-size:50px}.buttons{gap:9px}.buttons button,.buttons a{font-size:15px;padding:14px 8px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div id="home" class="hero">
+<div class="heroContent">
+<h1 class="brand">La Bamba</h1>
+<div class="tag">Alta cocina del mar</div>
+<div class="buttons">
+<a class="call" href="tel:+522228453790">☎️ Llamar</a>
+<a class="wa" href="https://wa.me/522228453790" target="_blank" rel="noopener">💬 WhatsApp</a>
+<button class="primary" onclick="openMenu()">📖 Carta</button>
+<button class="gold" onclick="openMenu();setTimeout(openCart,80)">🛒 Ordena aquí</button>
+<a class="location wide" href="https://www.google.com/maps/search/?api=1&query=Restaurante+La+Bamba+Puebla" target="_blank" rel="noopener">📍 Ubicación</a>
+</div>
+<div class="small">Toca una opción para comenzar</div>
+</div>
+</div>
+
+<div id="menu">
+<nav>
+<button onclick="show('inicio')">Entradas</button>
+<button onclick="show('tostadas')">Tostadas</button>
+<button onclick="show('tacos')">Tacos</button>
+<button onclick="show('especiales')">Especialidades</button>
+<button class="back" onclick="goHome()">Inicio</button>
+</nav>
+
+<main id="inicio"><section><h2>Para abrir el apetito</h2>
+<div class="item"><b>Torre de mariscos</b><div class="price">$250</div><button class="add" onclick="add('Torre de mariscos',250)">＋ Agregar</button></div>
+<div class="item"><b>Orden de camarón para pelar</b><div class="price">$200</div><button class="add" onclick="add('Orden de camarón para pelar',200)">＋ Agregar</button></div>
+<div class="item"><b>Empanadas de pescado (3)</b><div class="price">$100</div><button class="add" onclick="add('Empanadas de pescado (3)',100)">＋ Agregar</button></div>
+<div class="item"><b>Empanadas surtidas (3)</b><div class="price">$100</div><button class="add" onclick="add('Empanadas surtidas (3)',100)">＋ Agregar</button></div>
+<div class="item"><b>Empanadas de camarón (3)</b><div class="price">$100</div><button class="add" onclick="add('Empanadas de camarón (3)',100)">＋ Agregar</button></div>
+<div class="item"><b>Empanadas de jaiba (3)</b><div class="price">$100</div><button class="add" onclick="add('Empanadas de jaiba (3)',100)">＋ Agregar</button></div>
+<div class="item"><b>Brochetas de camarón (3)</b><div class="price">$190</div><button class="add" onclick="add('Brochetas de camarón (3)',190)">＋ Agregar</button></div>
+<div class="item"><b>Pescadillas (3)</b><div class="price">$100</div><button class="add" onclick="add('Pescadillas (3)',100)">＋ Agregar</button></div>
+<div class="item"><b>Tiradito de salmón / atún</b><div class="price">$240</div><button class="add" onclick="add('Tiradito de salmón / atún',240)">＋ Agregar</button></div>
+<div class="item"><b>Tiradito de callo de hacha</b><div class="price">$260</div><button class="add" onclick="add('Tiradito de callo de hacha',260)">＋ Agregar</button></div>
+<div class="item"><b>Charola de mariscos</b><div class="price">$450</div><button class="add" onclick="add('Charola de mariscos',450)">＋ Agregar</button></div>
+</section></main>
+
+<main id="tostadas" style="display:none"><section><h2>Tostadas</h2>
+<div class="item"><b>Camarón · Ceviche · Jaiba · Surtidas</b><div class="price">$150 · orden de 3</div><button class="add" onclick="add('Tostadas (orden de 3)',150)">＋ Agregar</button></div>
+<div class="item"><b>Tostada por pieza</b><div class="price">$60</div><button class="add" onclick="add('Tostada por pieza',60)">＋ Agregar</button></div>
+<div class="item"><b>Medallón de atún</b><div class="price">$220</div><button class="add" onclick="add('Medallón de atún',220)">＋ Agregar</button></div>
+</section></main>
+
+<main id="tacos" style="display:none"><section><h2>Tacos</h2>
+<div class="item"><b>Taco gobernador de pulpo</b><div class="price">$150</div><button class="add" onclick="add('Taco gobernador de pulpo',150)">＋ Agregar</button></div>
+<div class="item"><b>Taco gobernador de camarón</b><div class="price">$160</div><button class="add" onclick="add('Taco gobernador de camarón',160)">＋ Agregar</button></div>
+<div class="item"><b>Tacos Bamba</b><div class="price">$160</div><button class="add" onclick="add('Tacos Bamba',160)">＋ Agregar</button></div>
+</section></main>
+
+<main id="especiales" style="display:none"><section><h2>Especialidades</h2>
+<div class="item"><b>Aguachile mixto</b><div class="price">$270</div><button class="add" onclick="add('Aguachile mixto',270)">＋ Agregar</button></div>
+<div class="item"><b>Hueva de lisa</b><div class="price">$250</div><button class="add" onclick="add('Hueva de lisa',250)">＋ Agregar</button></div>
+<div class="item"><b>Cola de langosta</b><div class="price">$1,600</div><button class="add" onclick="add('Cola de langosta',1600)">＋ Agregar</button></div>
+</section></main>
+</div>
+
+<button id="cart" onclick="openCart()">🛒 Pedido <span id="num">0</span></button>
+
+<div id="panel" onclick="if(event.target===this)closeCart()">
+<div class="box">
+<button class="close" onclick="closeCart()">×</button>
+<h2>Tu pedido</h2>
+<div id="lines">Tu pedido está vacío.</div>
+<h3>Total: $<span id="total">0</span></h3>
+<input id="name" placeholder="Nombre">
+<input id="table" placeholder="Número de mesa">
+<textarea id="notes" rows="3" placeholder="Observaciones"></textarea>
+<button class="send" onclick="send()">💬 Enviar pedido por WhatsApp</button>
+</div>
+</div>
+</div>
+
+<script>
+const order=[];
+function openMenu(){document.getElementById('home').style.display='none';document.getElementById('menu').style.display='block';show('inicio');window.scrollTo(0,0)}
+function goHome(){closeCart();document.getElementById('menu').style.display='none';document.getElementById('home').style.display='flex';window.scrollTo(0,0)}
+function add(name,price){let x=order.find(a=>a.name===name);if(x)x.qty++;else order.push({name,price,qty:1});render();openCart()}
+function render(){let h='',t=0,n=0;order.forEach((x,i)=>{let sub=x.price*x.qty;t+=sub;n+=x.qty;h+=`<div class="line"><span><b>${x.name}</b><br>${x.qty} × $${x.price.toLocaleString('es-MX')}</span><span><b>$${sub.toLocaleString('es-MX')}</b><br><button onclick="minus(${i})">−</button></span></div>`});document.getElementById('lines').innerHTML=h||'Tu pedido está vacío.';document.getElementById('total').textContent=t.toLocaleString('es-MX');document.getElementById('num').textContent=n}
+function minus(i){order[i].qty--;if(order[i].qty<=0)order.splice(i,1);render()}
+function openCart(){render();document.getElementById('panel').style.display='flex'}
+function closeCart(){document.getElementById('panel').style.display='none'}
+function show(id){document.querySelectorAll('#menu main').forEach(x=>x.style.display='none');document.getElementById(id).style.display='block';window.scrollTo(0,0)}
+function send(){if(!order.length){alert('Agrega al menos un platillo.');return}let msg='🍽️ PEDIDO — LA BAMBA\n\n';msg+='👤 Nombre: '+(document.getElementById('name').value||'No indicado')+'\n';msg+='🪑 Mesa: '+(document.getElementById('table').value||'No indicada')+'\n\n';let total=0;order.forEach(x=>{let s=x.price*x.qty;total+=s;msg+=x.qty+' × '+x.name+' — $'+s.toLocaleString('es-MX')+'\n'});msg+='\n💰 TOTAL: $'+total.toLocaleString('es-MX')+'\n';msg+='📝 '+(document.getElementById('notes').value||'Sin observaciones');location.href='https://wa.me/522228453790?text='+encodeURIComponent(msg)}
+render();
+</script>
+</body>
+</html>
